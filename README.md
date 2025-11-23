@@ -1,114 +1,32 @@
-# Student Management System Plus (Java Console App)
+# Student Management System Plus（Java Console App）
 
-A console-based Student Management & Account System implemented in Java as part of my IT career transition learning projects.
+A small console-based student/account management system written in Java, created as part of my self-study while preparing to move into an IT engineering role in Japan.
 
-Java を用いて実装したコンソール型の学生管理・アカウント管理システムです。  
-IT エンジニアへのキャリアチェンジに向けた学習用プロジェクトの一つとして開発しました。
-
----
-
-## 1. Project Summary / プロジェクト概要
-
-**EN**
-
-This project implements a simple **account system + student management entry point** in pure Java.  
-It focuses on:
-
-- Practicing core Java syntax and OOP
-- Designing a small but realistic login / registration / password reset flow
-- Implementing input validation for ID, phone number, and CAPTCHA
-- Structuring code into reusable methods
-
-The goal is to simulate a very small part of a real-world system (authentication and basic checks) while building my fundamentals for future backend and business application development.
-
-**JP**
-
-本プロジェクトでは、純粋な Java で **アカウント管理＋学生管理システムの入口部分** を実装しています。  
-主な狙いは以下の通りです：
-
-- Java の基本構文およびオブジェクト指向の実践
-- 現実の業務システムを意識したログイン／登録／パスワード再設定フローの設計
-- 身分証番号・電話番号・CAPTCHA などの入力チェック処理の実装
-- メソッド分割による再利用可能なバリデーションロジックの作成
-
-実務システムの一部（認証・入力チェック）のミニ版をイメージしつつ、将来的なバックエンド開発や業務システム開発に必要な基礎力を身につけることを目的としています。
+Java で勉強しながら作成した、コンソールベースの学生管理・アカウント管理システムです。  
+業務システムの「ログイン周り」や「入力チェック」のイメージをつかむことを意識して作りました。
 
 ---
 
-## 2. Main Features / 主な機能
+## 1. Introduction / はじめに
 
-### 2.1 Account System / アカウント管理
+This project started as a simple practice assignment, but I tried to treat it more like a tiny real-world system rather than just a “Hello World” level exercise.
 
-**EN**
+- There is a **login / register / forgot password** account flow.
+- Input values are actually validated (ID card, phone number, username format, etc.).
+- After login, control is passed to a separate `StudentSystem` class, which is intended to handle student data.
 
-- **User Registration**
-  - Username: 3–15 characters, alphanumeric only, must be unique
-  - Password: double-entry confirmation
-  - ID Card:
-    - 18 characters
-    - Cannot start with `0`
-    - First 17 must be digits
-    - Last character: digit or `X/x`
-  - Phone Number:
-    - 11 characters
-    - Cannot start with `0`
-    - All digits
+I am currently learning Java with the goal of transitioning into IT (e.g. 社内SE, backend, test engineer).  
+So in this project, I focused not only on “making it run”, but also on how to break logic into methods, think about validation rules, and design a flow that feels a bit closer to what business applications do.
 
-- **Login**
-  - Username existence check
-  - Password check
-  - CAPTCHA validation
-    - 4 letters (A–Z, a–z) + 1 digit
-    - Characters are randomly shuffled
-    - User must input the shown CAPTCHA correctly
-
-- **Forgot Password**
-  - User inputs:
-    - Username
-    - ID card number
-    - Phone number
-  - Only if all three match the registered data, password reset is allowed
-
-**JP**
-
-- **ユーザー登録**
-  - ユーザー名：
-    - 3〜15 文字
-    - 英数字のみ
-    - 既存ユーザー名との重複禁止
-  - パスワード：
-    - 2 回入力し、一致した場合のみ登録
-  - 身分証番号：
-    - 全長 18 桁
-    - 先頭は `0` 以外
-    - 先頭 17 桁は数字
-    - 最後の 1 桁は数字または `X/x`
-  - 電話番号：
-    - 全長 11 桁
-    - 先頭は `0` 以外
-    - 全て数字
-
-- **ログイン**
-  - ユーザー名の存在チェック
-  - パスワードチェック
-  - CAPTCHA チェック
-    - 英字 4 文字（A–Z, a–z）＋数字 1 桁
-    - ランダムに並び替えた 5 文字を表示
-    - 表示された文字列を正しく入力した場合のみ認証成功
-
-- **パスワード再設定**
-  - 以下 3 つの情報を入力：
-    - ユーザー名
-    - 身分証番号
-    - 電話番号
-  - 3 つすべてが登録情報と一致した場合のみ、パスワードの再設定が可能
+このプロジェクトは単なる練習問題ではなく、「実際のシステムならこういうチェックをしそうだな」という感覚を掴むことを意識して作りました。  
+ログイン機能やバリデーション処理を通して、今後の業務システム開発に繋がる基礎力を身につけることが狙いです。
 
 ---
 
-### 2.2 Student Management Entry / 学生管理システムへの入口
+## 2. What this app does / できること
 
-After successful login, the program creates an instance of `StudentSystem` and calls:
+起動すると、まず簡単なメニューが表示されます。
 
-```java
-StudentSystem ss = new StudentSystem();
-ss.StartStudentSystem();
+```text
+欢迎来到学生管理系统
+请选择操作  1.登录 2.注册 3.忘记密码
