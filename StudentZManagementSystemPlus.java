@@ -15,6 +15,7 @@ public class StudentZManagementSystemPlus {
             System.out.println("请选择操作  1.登录 2.注册 3.忘记密码");
             Scanner sc = new Scanner(System.in);
             String chooseNumber = sc.next();
+            String name = "hello";
 
             switch (chooseNumber) {
                 case "1": {
